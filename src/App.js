@@ -1,8 +1,10 @@
+import Layout from "./components/Layout/Layout";
+
 function App() {
     return (
-        <div>
-
-        </div>
+        <Layout>
+            <div>Welcome to System</div>
+        </Layout>
     );
 }
 
