@@ -15,7 +15,9 @@ function App() {
         <Layout>
             <Routes>
                 {!authCtx.isLoggedIn && <Route path={'/'} element={<WelcomePage/>}/>}
+                {authCtx.isLoggedIn && <Route path={'/'} element={<Navigate replace to={'/products'}/>}/>}
                 {!authCtx.isLoggedIn && <Route path={'/auth'} element={<AuthPage/>}/>}
+                {authCtx.isLoggedIn && <Route path={'/auth'} element={<Navigate replace to={'/products'}/>}/>}
                 {authCtx.isLoggedIn && <Route path={'/products'} element={<HomePage/>}/>}
                 {!authCtx.isLoggedIn && <Route path={'/products'} element={<Navigate replace to={'/auth'}/>}/>}
                 <Route path={'*'} element={<NotFound/>}/>
