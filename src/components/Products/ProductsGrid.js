@@ -1,8 +1,9 @@
 import React from 'react';
 import "react-multi-carousel/lib/styles.css"
 import Carousel from "react-multi-carousel";
-import CardItem from "./CardItem";
-import styles from './CardGrid.module.css'
+import ProductItem from "./ProductItem";
+import styles from './ProductsGrid.module.css'
+import LoadingSpinner from "../UI/LoadingSpinner";
 
 const responsive = {
     superLargeDesktop: {
@@ -24,22 +25,25 @@ const responsive = {
     }
 };
 
-const CardGrid = (props) => {
+const ProductsGrid = (props) => {
 
     return (
         <section className={styles.main}>
-            <Carousel
+            {props.products.length === 0 && <div className={styles.loaderDiv}>
+                <LoadingSpinner/>
+            </div>}
+            {props.products.length !== 0 && <Carousel
                 responsive={responsive}
                 showDots={true}
                 containerClass={"carousel-container"}
             >
-                {/*{props.products.length === 0 && <LoadingSpinner/>}*/}
-                {props.products.length !== 0 && props.products.map((product) => {
-                    return <CardItem key={product.id} product={product}/>
+                {props.products.map((product) => {
+                    return <ProductItem key={product.id} product={product}/>
                 })}
-            </Carousel>
+            </Carousel>}
+
         </section>
     );
 };
 
-export default CardGrid;
+export default ProductsGrid;

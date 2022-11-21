@@ -1,34 +1,18 @@
 import Layout from "./components/Layout/Layout";
-import CardGrid from "./components/Card/CardGrid";
-import {useCallback, useEffect, useState} from "react";
+import { Routes,Route } from 'react-router-dom'
+import WelcomePage from "./pages/WelcomePage";
+import AuthPage from "./pages/AuthPage";
+import HomePage from "./pages/HomePage";
 
 function App() {
-    const [products, setProducts] = useState([]);
-
-    // useEffect(() => {
-    //     const dataFetch = async () => {
-    //         const data = await (await fetch('https://dummyjson.com/products')).json();
-    //         setProducts(data.products);
-    //     }
-    //     dataFetch()
-    // }, [])
-    const fetchProductsHandler = useCallback(async () => {
-
-        const response = await fetch('https://dummyjson.com/products');
-
-        const data = await response.json();
-
-        setProducts(data.products)
-
-    }, []);
-
-    useEffect(() => {
-        fetchProductsHandler();
-    },[fetchProductsHandler])
 
     return (
         <Layout>
-            <CardGrid products={products}/>
+            <Routes>
+                <Route path={'/'} element={<WelcomePage/>}/>
+                <Route path={'/auth'} element={<AuthPage/>}/>
+                <Route path={'/products'} element={<HomePage/>}/>
+            </Routes>
         </Layout>
     );
 }
