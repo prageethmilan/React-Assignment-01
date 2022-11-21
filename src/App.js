@@ -1,10 +1,10 @@
 import Layout from "./components/Layout/Layout";
-import WelcomePage from './pages/WelcomePage'
+import AuthPage from "./pages/AuthPage";
 
 function App() {
     return (
         <Layout>
-            <WelcomePage/>
+            <AuthPage/>
         </Layout>
     );
 }
