@@ -1,17 +1,24 @@
 import Layout from "./components/Layout/Layout";
-import { Routes,Route } from 'react-router-dom'
+import {Navigate, Route, Routes} from 'react-router-dom'
 import WelcomePage from "./pages/WelcomePage";
 import AuthPage from "./pages/AuthPage";
 import HomePage from "./pages/HomePage";
+import AuthContext from "./store/auth-context";
+import {useContext} from "react";
+import NotFound from "./pages/NotFound";
 
 function App() {
+
+    const authCtx = useContext(AuthContext);
 
     return (
         <Layout>
             <Routes>
-                <Route path={'/'} element={<WelcomePage/>}/>
-                <Route path={'/auth'} element={<AuthPage/>}/>
-                <Route path={'/products'} element={<HomePage/>}/>
+                {!authCtx.isLoggedIn && <Route path={'/'} element={<WelcomePage/>}/>}
+                {!authCtx.isLoggedIn && <Route path={'/auth'} element={<AuthPage/>}/>}
+                {authCtx.isLoggedIn && <Route path={'/products'} element={<HomePage/>}/>}
+                {!authCtx.isLoggedIn && <Route path={'/products'} element={<Navigate replace to={'/auth'}/>}/>}
+                <Route path={'*'} element={<NotFound/>}/>
             </Routes>
         </Layout>
     );

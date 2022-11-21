@@ -27,12 +27,15 @@
 }
 
 .nav a {
+    color: purple;
+    font-weight: bolder;
     text-decoration: none;
-    color: #88dfdf;
 }
 
 .nav a:hover,
 .nav a:active,
 .nav a.active {
-    color: #e6fcfc;
+    color: #001ff6;
+    font-weight: bolder;
+    border-bottom: 4px solid #0040ff;
 }
