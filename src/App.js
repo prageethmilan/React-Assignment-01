@@ -1,9 +1,10 @@
 import Layout from "./components/Layout/Layout";
+import Auth from "./components/Auth/Auth";
 
 function App() {
     return (
         <Layout>
-            <div>Welcome to System</div>
+            <Auth/>
         </Layout>
     );
 }
