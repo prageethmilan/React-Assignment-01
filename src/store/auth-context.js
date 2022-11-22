@@ -5,10 +5,12 @@ import React, {useState} from "react";
 const AuthContext = React.createContext({
     uid: '',
     isLoggedIn: false,
+    photoURL: '',
     login: (uid) => {
     },
     logout: () => {
-    }
+    },
+    updatePhoto: (photoURL) => {}
 })
 
 // const calculateRemainingTime = (expirationTime) => {
@@ -48,6 +50,7 @@ export const AuthContextProvider = (props) => {
     }
 
     const [uid, setUid] = useState(initialUid);
+    const [photoURL,setPhotoURL] = useState('');
 
     const userIsLoggedIn = !!uid;
 
@@ -71,6 +74,10 @@ export const AuthContextProvider = (props) => {
         // logoutTimer = setTimeout(logoutHandler, remainingTime);
     }
 
+    const updatePhotoURLHandler = (photoURL) => {
+        setPhotoURL(photoURL)
+    }
+
     // useEffect(() => {
     //     if (tokenData) {
     //         console.log(tokenData.duration);
@@ -81,8 +88,10 @@ export const AuthContextProvider = (props) => {
     const contextValue = {
         uid: uid,
         isLoggedIn: userIsLoggedIn,
+        photoURL:photoURL,
         login: loginHandler,
         logout: logoutHandler,
+        updatePhoto: updatePhotoURLHandler
     };
 
     return (

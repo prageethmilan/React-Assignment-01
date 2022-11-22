@@ -12,12 +12,12 @@ const MainNavigation = () => {
         const navigate = useNavigate();
         const authCtx = useContext(AuthContext);
         const [open, setOpen] = useState(false);
-        const [imageUrl, setImageUrl] = useState('');
+        // const [imageUrl, setImageUrl] = useState('');
 
         useEffect(() => {
 
             if (currentUser?.photoURL) {
-                setImageUrl(currentUser.photoURL);
+                authCtx.updatePhoto(currentUser.photoURL);
             }
 
         }, [currentUser]);
@@ -31,10 +31,16 @@ const MainNavigation = () => {
             try {
                 await logout();
                 authCtx.logout();
+                setOpen(prevState => !prevState);
                 // navigate('/')
             } catch (e) {
                 alert(e.message)
             }
+        }
+
+        const changeVisibility = () => {
+            console.log(open);
+            setOpen((prevState => !prevState));
         }
 
         return (
@@ -62,14 +68,13 @@ const MainNavigation = () => {
                                 </NavLink>
                             </li>}
                             {authCtx.isLoggedIn && <li>
-                                <Avatar style={{cursor: 'pointer'}} src={imageUrl} onClick={() => setOpen(!open)}/>
+                                <Avatar style={{cursor: 'pointer'}} src={authCtx.photoURL} onClick={changeVisibility}/>
                             </li>}
                         </ul>
                     </nav>
                 </header>
                 {authCtx.isLoggedIn &&
                 <div className={`dropdown-menu ${open ? 'active' : 'inactive'}`}>
-                    {/*<h3>The Kiet<br/><span>Website Designer</span></h3>*/}
                     <small>Logged in as :- </small>
                     <small><b>{currentUser?.email}</b></small>
                     <ul>

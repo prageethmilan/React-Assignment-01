@@ -1,12 +1,14 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import styles from "../Profile/EditProfile.module.css";
 import {upload, useAuth} from "../../store/firebase";
-import {useNavigate} from 'react-router-dom';
+import AuthContext from "../../store/auth-context";
+import LoadingSpinner from "../UI/LoadingSpinner";
 
 const EditProfile = (props) => {
-    const navigate = useNavigate();
+    const authCtx = useContext(AuthContext);
     const currentUser = useAuth();
     const [photo, setPhoto] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
 
     const imageChangeHandler = (e) => {
         if (e.target.files[0]) {
@@ -16,8 +18,9 @@ const EditProfile = (props) => {
 
     const uploadImageHandler = async () => {
         try {
-            await upload(photo, currentUser)
-            navigate('/products')
+            const photoURL = await upload(photo, currentUser, setIsLoading)
+            authCtx.updatePhoto(photoURL);
+            setPhoto(null);
         } catch (e) {
             alert(e.message)
         }
@@ -34,8 +37,9 @@ const EditProfile = (props) => {
             <div className={styles.actions}>
                 <button type={"submit"} onClick={uploadImageHandler}>Update</button>
             </div>
+            {isLoading && <LoadingSpinner/>}
         </section>
     );
-};
+}
 
 export default EditProfile;

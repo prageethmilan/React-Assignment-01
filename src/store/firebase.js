@@ -1,5 +1,4 @@
 import {useEffect, useState} from "react";
-// Import the functions you need from the SDKs you need
 import {initializeApp} from "firebase/app";
 import {
     createUserWithEmailAndPassword,
@@ -26,6 +25,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const storage = getStorage(app);
 
+
 export function signup(email, password) {
     return createUserWithEmailAndPassword(auth, email, password);
 }
@@ -51,8 +51,9 @@ export function useAuth() {
 }
 
 // Storage
-export async function upload(file, currentUser) {
+export async function upload(file, currentUser, setIsLoading) {
 
+    setIsLoading(true);
     const fileRef = ref(storage, currentUser.uid + '.png');
 
     const snapshot = await uploadBytes(fileRef, file);
@@ -60,5 +61,9 @@ export async function upload(file, currentUser) {
 
     updateProfile(currentUser, {photoURL});
 
+    setIsLoading(false);
+
     alert("Uploaded file!");
+
+    return photoURL;
 }
