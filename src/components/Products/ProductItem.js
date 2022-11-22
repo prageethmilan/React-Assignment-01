@@ -1,7 +1,14 @@
 import React from 'react';
 import {Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Typography} from "@mui/material";
+import {useNavigate} from 'react-router-dom'
 
 const ProductItem = (props) => {
+
+    const navigate = useNavigate();
+
+    const showProductDetails = (productId) => {
+        navigate('/products/' + productId);
+    }
 
     return (
         <Card sx={{maxWidth: 345}} style={{marginLeft: '10px', marginRight: '10px'}}>
@@ -26,7 +33,7 @@ const ProductItem = (props) => {
                 </CardContent>
             </CardActionArea>
             <CardActions>
-                <Button size={"small"} color={"primary"}>
+                <Button size={"small"} color={"primary"} onClick={() => showProductDetails(props.product.id)}>
                     View
                 </Button>
             </CardActions>

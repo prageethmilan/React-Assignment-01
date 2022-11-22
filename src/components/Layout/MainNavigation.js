@@ -32,7 +32,6 @@ const MainNavigation = () => {
                 await logout();
                 authCtx.logout();
                 setOpen(prevState => !prevState);
-                // navigate('/')
             } catch (e) {
                 alert(e.message)
             }
