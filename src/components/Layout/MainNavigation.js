@@ -12,12 +12,15 @@ const MainNavigation = () => {
         const navigate = useNavigate();
         const authCtx = useContext(AuthContext);
         const [open, setOpen] = useState(false);
-
-        let src = '';
+        const [imageUrl, setImageUrl] = useState('');
 
         useEffect(() => {
-            src = currentUser?.photoURL;
-        }, [currentUser])
+
+            if (currentUser?.photoURL) {
+                setImageUrl(currentUser.photoURL);
+            }
+
+        }, [currentUser]);
 
         const editProfileHandler = () => {
             navigate('/profile')
@@ -48,8 +51,7 @@ const MainNavigation = () => {
                                 >
                                     Login
                                 </NavLink>
-                            </li>
-                            }
+                            </li>}
                             {authCtx.isLoggedIn &&
                             <li>
                                 <NavLink
@@ -58,10 +60,9 @@ const MainNavigation = () => {
                                 >
                                     Home
                                 </NavLink>
-                            </li>
-                            }
+                            </li>}
                             {authCtx.isLoggedIn && <li>
-                                <Avatar style={{cursor: 'pointer'}} src={src} onClick={() => setOpen(!open)}/>
+                                <Avatar style={{cursor: 'pointer'}} src={imageUrl} onClick={() => setOpen(!open)}/>
                             </li>}
                         </ul>
                     </nav>
