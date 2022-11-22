@@ -1,40 +1,40 @@
-import React, {useCallback, useEffect, useState} from "react";
+import React, {useCallback, useState} from "react";
 
-let logoutTimer;
+// let logoutTimer;
 
 const AuthContext = React.createContext({
-    token: '',
+    uid: '',
     isLoggedIn: false,
-    login: (token) => {
+    login: (uid) => {
     },
     logout: () => {
     }
 })
 
-const calculateRemainingTime = (expirationTime) => {
-    const currentTime = new Date().getTime();
-    const adjExpirationTime = new Date(expirationTime).getTime();
-
-    const remainingDuration = adjExpirationTime - currentTime;
-
-    return remainingDuration;
-};
+// const calculateRemainingTime = (expirationTime) => {
+//     const currentTime = new Date().getTime();
+//     const adjExpirationTime = new Date(expirationTime).getTime();
+//
+//     const remainingDuration = adjExpirationTime - currentTime;
+//
+//     return remainingDuration;
+// };
 
 const retrieveStoredToken = () => {
-    const storedToken = localStorage.getItem('token');
-    const storedExpirationDate = localStorage.getItem('expirationTime');
+    const storedUid = localStorage.getItem('uid');
+    // const storedExpirationDate = localStorage.getItem('expirationTime');
 
-    const remainingTime = calculateRemainingTime(storedExpirationDate);
+    // const remainingTime = calculateRemainingTime(storedExpirationDate);
 
-    if (remainingTime <= 3600) {
-        localStorage.removeItem('token');
-        localStorage.removeItem('expirationTime');
-        return null;
-    }
+    // if (remainingTime <= 3600) {
+    //     localStorage.removeItem('uid');
+    //     localStorage.removeItem('expirationTime');
+    //     return null;
+    // }
 
     return {
-        token: storedToken,
-        duration: remainingTime,
+        uid: storedUid,
+        // duration: remainingTime,
     };
 };
 
@@ -42,44 +42,44 @@ export const AuthContextProvider = (props) => {
 
     const tokenData = retrieveStoredToken();
 
-    let initialToken;
+    let initialUid;
     if (tokenData) {
-        initialToken = tokenData.token;
+        initialUid = tokenData.uid;
     }
 
-    const [token, setToken] = useState(initialToken);
+    const [uid, setUid] = useState(initialUid);
 
-    const userIsLoggedIn = !!token;
+    const userIsLoggedIn = !!uid;
 
     const logoutHandler = useCallback(() => {
-        setToken(null);
-        localStorage.removeItem('token');
-        localStorage.removeItem('expirationTime');
+        setUid(null);
+        localStorage.removeItem('uid');
+        // localStorage.removeItem('expirationTime');
 
-        if (logoutTimer) {
-            clearTimeout(logoutTimer)
-        }
+        // if (logoutTimer) {
+        //     clearTimeout(logoutTimer)
+        // }
     }, []);
 
-    const loginHandler = (token, expirationTime) => {
-        setToken(token);
-        localStorage.setItem('token', token);
-        localStorage.setItem('expirationTime', expirationTime);
+    const loginHandler = (uid) => {
+        setUid(uid);
+        localStorage.setItem('uid', uid);
+        // localStorage.setItem('expirationTime', expirationTime);
 
-        const remainingTime = calculateRemainingTime(expirationTime);
+        // const remainingTime = calculateRemainingTime(expirationTime);
 
-        logoutTimer = setTimeout(logoutHandler, remainingTime);
+        // logoutTimer = setTimeout(logoutHandler, remainingTime);
     }
 
-    useEffect(() => {
-        if (tokenData) {
-            console.log(tokenData.duration);
-            logoutTimer = setTimeout(logoutHandler, tokenData.duration);
-        }
-    }, [tokenData, logoutHandler]);
+    // useEffect(() => {
+    //     if (tokenData) {
+    //         console.log(tokenData.duration);
+    //         logoutTimer = setTimeout(logoutHandler, tokenData.duration);
+    //     }
+    // }, [tokenData, logoutHandler]);
 
     const contextValue = {
-        token: token,
+        uid: uid,
         isLoggedIn: userIsLoggedIn,
         login: loginHandler,
         logout: logoutHandler,
