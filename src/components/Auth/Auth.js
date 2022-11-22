@@ -20,7 +20,6 @@ const Auth = (props) => {
 
     const submitFormHandler = (event) => {
         event.preventDefault();
-        console.log(isLogin)
 
         if (isLogin) {
             signInUserHandler()

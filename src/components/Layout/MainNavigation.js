@@ -2,74 +2,93 @@ import React, {useContext, useEffect, useState} from 'react';
 import {Avatar} from "@mui/material";
 import styles from './MainNavigation.module.css'
 import AuthContext from "../../store/auth-context";
-import {NavLink} from "react-router-dom";
-import {useAuth} from "../../store/firebase";
+import {NavLink, useNavigate} from "react-router-dom";
+import {logout, useAuth} from "../../store/firebase";
 import edit from '../../assets/images/edit.png'
-import logout from '../../assets/images/logout.png'
+import Imglogout from '../../assets/images/logout.png'
 
 const MainNavigation = () => {
-    const currentUser = useAuth();
+        const currentUser = useAuth();
+        const navigate = useNavigate();
+        const authCtx = useContext(AuthContext);
+        const [open, setOpen] = useState(false);
 
-    const authCtx = useContext(AuthContext);
-    const [open, setOpen] = useState(false);
+        let src = '';
 
-    let src = '';
+        useEffect(() => {
+            src = currentUser?.photoURL;
+        }, [currentUser])
 
-    useEffect(() => {
-        if (currentUser !== undefined) {
-            if (currentUser.photoURL !== null) {
-                src = currentUser.photoURL;
+        const editProfileHandler = () => {
+            navigate('/profile')
+            setOpen(false);
+        }
+
+        const logoutHandler = async () => {
+            try {
+                await logout();
+                authCtx.logout();
+                // navigate('/')
+            } catch (e) {
+                alert(e.message)
             }
         }
-    }, [currentUser])
 
-    return (
-        <div>
-            <header className={styles.header}>
-                <div className={styles.logo}>Product Store</div>
-                <nav className={styles.nav}>
+        return (
+            <div>
+                <header className={styles.header}>
+                    <div className={styles.logo}>Product Store</div>
+                    <nav className={styles.nav}>
+                        <ul>
+                            {!authCtx.isLoggedIn &&
+                            <li>
+                                <NavLink
+                                    className={(navData) => (navData.isActive ? styles.active : '')}
+                                    to={'/auth'}
+                                >
+                                    Login
+                                </NavLink>
+                            </li>
+                            }
+                            {authCtx.isLoggedIn &&
+                            <li>
+                                <NavLink
+                                    className={(navData) => (navData.isActive ? styles.active : '')}
+                                    to={'/products'}
+                                >
+                                    Home
+                                </NavLink>
+                            </li>
+                            }
+                            {authCtx.isLoggedIn && <li>
+                                <Avatar style={{cursor: 'pointer'}} src={src} onClick={() => setOpen(!open)}/>
+                            </li>}
+                        </ul>
+                    </nav>
+                </header>
+                {authCtx.isLoggedIn &&
+                <div className={`dropdown-menu ${open ? 'active' : 'inactive'}`}>
+                    {/*<h3>The Kiet<br/><span>Website Designer</span></h3>*/}
+                    <small>Logged in as :- </small>
+                    <small><b>{currentUser?.email}</b></small>
                     <ul>
-                        {!authCtx.isLoggedIn &&
-                        <li>
-                            <NavLink
-                                className={(navData) => (navData.isActive ? styles.active : '')}
-                                to={'/auth'}
-                            >
-                                Login
-                            </NavLink>
-                        </li>
-                        }
-                        {authCtx.isLoggedIn &&
-                        <li>
-                            <NavLink
-                                className={(navData) => (navData.isActive ? styles.active : '')}
-                                to={'/products'}
-                            >
-                                Home
-                            </NavLink>
-                        </li>
-                        }
-                        {authCtx.isLoggedIn && <li>
-                            <Avatar src={src} onClick={setOpen(!open)}/>
-                        </li>}
+                        <DropdownItem
+                            action={editProfileHandler}
+                            img={edit}
+                            text={"Edit Profile"}
+                        />
+                        <DropdownItem action={logoutHandler} img={Imglogout} text={"Logout"}/>
                     </ul>
-                </nav>
-            </header>
-            <div className={`dropdown-menu ${open ? 'active' : 'inactive'}`}>
-                <h3>The Kiet<br/><span>Website Designer</span></h3>
-                <ul>
-                    <DropdownItem img={edit} text={"Edit Profile"}/>
-                    <DropdownItem img={logout} text={"Logout"}/>
-                </ul>
+                </div>}
             </div>
-        </div>
-    );
-};
+        );
+    }
+;
 
-function DropdownItem(props){
-    return(
-        <li className = 'dropdownItem'>
-            <img src={props.img} alt={''} />
+function DropdownItem(props) {
+    return (
+        <li className={styles.dropdownItem} onClick={props.action}>
+            <img src={props.img} alt={''}/>
             <a> {props.text} </a>
         </li>
     );

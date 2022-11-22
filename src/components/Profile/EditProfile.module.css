@@ -1,0 +1,60 @@
+.profile {
+    margin: 3rem auto;
+    width: 95%;
+    max-width: 30rem;
+    border-radius: 6px;
+    background-color: #a5a5a5;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    padding: 1rem;
+    text-align: center;
+    color: #000000;
+}
+
+.profile h1{
+    font-size: 35px;
+}
+
+.control {
+    margin-bottom: 1rem;
+}
+
+.control label {
+    display: block;
+    font-weight: bolder;
+    margin-bottom: 0.5rem;
+}
+
+.control input {
+    font: inherit;
+    background-color: #f1e1fc;
+    color: #001afc;
+    border-radius: 4px;
+    border: 1px solid white;
+    width: 90%;
+    text-align: left;
+    padding: 0.25rem;
+}
+
+.actions {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.actions button {
+    cursor: pointer;
+    font: inherit;
+    color: #000000;
+    background-color: transparent;
+    border: 3px solid #9f5ccc;
+    border-radius: 4px;
+    padding: 0.5rem 2.5rem;
+    font-weight: bolder;
+}
+
+.actions button:hover {
+    background-color: #873abb;
+    border-color: #873abb;
+    color: white;
+}

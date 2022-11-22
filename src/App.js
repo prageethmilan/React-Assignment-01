@@ -6,6 +6,7 @@ import HomePage from "./pages/HomePage";
 import AuthContext from "./store/auth-context";
 import {useContext} from "react";
 import NotFound from "./pages/NotFound";
+import EditProfile from "./components/Profile/EditProfile";
 
 function App() {
 
@@ -20,6 +21,8 @@ function App() {
                 {authCtx.isLoggedIn && <Route path={'/auth'} element={<Navigate replace to={'/products'}/>}/>}
                 {authCtx.isLoggedIn && <Route path={'/products'} element={<HomePage/>}/>}
                 {!authCtx.isLoggedIn && <Route path={'/products'} element={<Navigate replace to={'/auth'}/>}/>}
+                {authCtx.isLoggedIn && <Route path={'/profile'} element={<EditProfile/>}/>}
+                {!authCtx.isLoggedIn && <Route path={'/profile'} element={<Navigate replace to={'/auth'}/>}/>}
                 <Route path={'*'} element={<NotFound/>}/>
             </Routes>
         </Layout>

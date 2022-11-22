@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from "react";
+import React, {useState} from "react";
 
 // let logoutTimer;
 
@@ -51,7 +51,7 @@ export const AuthContextProvider = (props) => {
 
     const userIsLoggedIn = !!uid;
 
-    const logoutHandler = useCallback(() => {
+    const logoutHandler = () => {
         setUid(null);
         localStorage.removeItem('uid');
         // localStorage.removeItem('expirationTime');
@@ -59,7 +59,7 @@ export const AuthContextProvider = (props) => {
         // if (logoutTimer) {
         //     clearTimeout(logoutTimer)
         // }
-    }, []);
+    };
 
     const loginHandler = (uid) => {
         setUid(uid);
