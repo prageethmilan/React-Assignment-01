@@ -1,23 +1,27 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Avatar} from "@mui/material";
 import styles from './MainNavigation.module.css'
-import AuthContext from "../../store/auth-context";
 import {NavLink, useNavigate} from "react-router-dom";
 import {logout, useAuth} from "../../store/firebase";
 import edit from '../../assets/images/edit.png'
 import Imglogout from '../../assets/images/logout.png'
+import {useDispatch, useSelector} from "react-redux";
+import {authActions} from "../../store/index";
 
 const MainNavigation = () => {
         const currentUser = useAuth();
         const navigate = useNavigate();
-        const authCtx = useContext(AuthContext);
+        const dispatch = useDispatch();
+        const isLoggedIn = useSelector((state) => state.isLoggedIn);
+        const photoURL = useSelector((state) => state.photoURL);
         const [open, setOpen] = useState(false);
-        // const [imageUrl, setImageUrl] = useState('');
 
         useEffect(() => {
 
+            dispatch(authActions.updatePhoto(''));
             if (currentUser?.photoURL) {
-                authCtx.updatePhoto(currentUser.photoURL);
+
+                dispatch(authActions.updatePhoto(currentUser.photoURL));
             }
 
         }, [currentUser]);
@@ -30,7 +34,7 @@ const MainNavigation = () => {
         const logoutHandler = async () => {
             try {
                 await logout();
-                authCtx.logout();
+                dispatch(authActions.logout());
                 setOpen(prevState => !prevState);
             } catch (e) {
                 alert(e.message)
@@ -47,7 +51,7 @@ const MainNavigation = () => {
                     <div className={styles.logo}>Product Store</div>
                     <nav className={styles.nav}>
                         <ul>
-                            {!authCtx.isLoggedIn &&
+                            {!isLoggedIn &&
                             <li>
                                 <NavLink
                                     className={(navData) => (navData.isActive ? styles.active : '')}
@@ -56,7 +60,7 @@ const MainNavigation = () => {
                                     Login
                                 </NavLink>
                             </li>}
-                            {authCtx.isLoggedIn &&
+                            {isLoggedIn &&
                             <li>
                                 <NavLink
                                     className={(navData) => (navData.isActive ? styles.active : '')}
@@ -65,13 +69,13 @@ const MainNavigation = () => {
                                     Home
                                 </NavLink>
                             </li>}
-                            {authCtx.isLoggedIn && <li>
-                                <Avatar style={{cursor: 'pointer'}} src={authCtx.photoURL} onClick={changeVisibility}/>
+                            {isLoggedIn && <li>
+                                <Avatar style={{cursor: 'pointer'}} src={photoURL} onClick={changeVisibility}/>
                             </li>}
                         </ul>
                     </nav>
                 </header>
-                {authCtx.isLoggedIn &&
+                {isLoggedIn &&
                 <div className={`dropdown-menu ${open ? 'active' : 'inactive'}`}>
                     <small>Logged in as :- </small>
                     <small><b>{currentUser?.email}</b></small>

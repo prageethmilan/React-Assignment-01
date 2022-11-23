@@ -28,19 +28,21 @@ const ProductsGrid = (props) => {
 
     return (
         <section className={styles.main}>
-            {props.products.length === 0 && <div className={styles.loaderDiv}>
-                <LoadingSpinner/>
-            </div>}
-            {props.products.length !== 0 && <Carousel
-                responsive={responsive}
-                showDots={true}
-                containerClass={"carousel-container"}
-            >
-                {props.products.map((product) => {
-                    return <ProductItem key={product.id} product={product}/>
-                })}
-            </Carousel>}
-
+            {props.products.length === 0
+                ?
+                <div className={styles.loaderDiv}>
+                    <LoadingSpinner/>
+                </div>
+                :
+                <Carousel
+                    responsive={responsive}
+                    showDots={true}
+                    containerClass={"carousel-container"}
+                >
+                    {props.products.map((product) => {
+                        return <ProductItem key={product.id} product={product}/>
+                    })}
+                </Carousel>}
         </section>
     );
 };

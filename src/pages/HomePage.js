@@ -12,7 +12,8 @@ const HomePage = (props) => {
 
     useEffect(() => {
         fetchProductsHandler();
-    },[fetchProductsHandler])
+        console.log("Fetch")
+    },[])
 
 
     return (

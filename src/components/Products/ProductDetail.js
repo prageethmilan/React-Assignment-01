@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import {Typography} from "@mui/material";
 import styles from './ProductDetail.module.css'
 import {useParams} from 'react-router-dom'
+import {Typography} from "@mui/material";
 
 const ProductDetail = (props) => {
     const params = useParams();
@@ -30,31 +30,36 @@ const ProductDetail = (props) => {
                 <img src={photo} alt=""/>
             </div>
             <div>
-                <Typography variant={"body1"} style={{textDecoration: 'underline',fontWeight: 'bold'}} >Description</Typography>
+                <Typography variant={"body1"}
+                            style={{textDecoration: 'underline', fontWeight: 'bold'}}>Description</Typography>
                 <Typography variant={"caption"}>
                     {product.description}
                 </Typography>
             </div>
             <div>
-                <Typography variant={"body1"} style={{textDecoration: 'underline',fontWeight: 'bold'}} >Category</Typography>
+                <Typography variant={"body1"}
+                            style={{textDecoration: 'underline', fontWeight: 'bold'}}>Category</Typography>
                 <Typography variant={"caption"}>
                     {product.category}
                 </Typography>
             </div>
             <div>
-                <Typography variant={"body1"} style={{textDecoration: 'underline',fontWeight: 'bold'}} >Price</Typography>
+                <Typography variant={"body1"}
+                            style={{textDecoration: 'underline', fontWeight: 'bold'}}>Price</Typography>
                 <Typography variant={"caption"}>
                     $ {product.price}
                 </Typography>
             </div>
             <div>
-                <Typography variant={"body1"} style={{textDecoration: 'underline',fontWeight: 'bold'}}>Discount %</Typography>
+                <Typography variant={"body1"} style={{textDecoration: 'underline', fontWeight: 'bold'}}>Discount
+                    %</Typography>
                 <Typography variant={"caption"}>
                     {product.discountPercentage}%
                 </Typography>
             </div>
             <div>
-                <Typography variant={"body1"} style={{textDecoration: 'underline',fontWeight: 'bold'}}>Stock</Typography>
+                <Typography variant={"body1"}
+                            style={{textDecoration: 'underline', fontWeight: 'bold'}}>Stock</Typography>
                 <Typography variant={"caption"}>
                     {product.stock}
                 </Typography>

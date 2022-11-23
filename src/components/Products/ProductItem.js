@@ -18,7 +18,7 @@ const ProductItem = (props) => {
                     height="140"
                     image={props.product.images[0]}
                     alt="card item"
-                    style={{backgroundSize: 'cover'}}
+                    style={{objectFit: 'contain'}}
                 />
                 <CardContent>
                     <Typography gutterBottom variant={"subtitle2"} component="div">

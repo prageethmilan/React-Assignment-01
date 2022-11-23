@@ -1,11 +1,12 @@
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 import styles from "../Profile/EditProfile.module.css";
 import {upload, useAuth} from "../../store/firebase";
-import AuthContext from "../../store/auth-context";
 import LoadingSpinner from "../UI/LoadingSpinner";
+import {useDispatch} from "react-redux";
+import {authActions} from "../../store/index";
 
 const EditProfile = (props) => {
-    const authCtx = useContext(AuthContext);
+    const dispatch = useDispatch();
     const currentUser = useAuth();
     const [photo, setPhoto] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -20,7 +21,7 @@ const EditProfile = (props) => {
         if (photo !== null) {
             try {
                 const photoURL = await upload(photo, currentUser, setIsLoading)
-                authCtx.updatePhoto(photoURL);
+                dispatch(authActions.updatePhoto(photoURL));
                 setPhoto(null);
             } catch (e) {
                 alert(e.message)
