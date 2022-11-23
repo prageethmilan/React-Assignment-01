@@ -10,7 +10,7 @@ import {
 } from "firebase/auth";
 import {getDownloadURL, getStorage, ref, uploadBytes} from "firebase/storage";
 
-// Your web app's Firebase configuration
+// web app's Firebase configuration
 const firebaseConfig = {
     apiKey: 'AIzaSyDukd84l0yXIlmrcxey4zI0PjWS5hfDA_o',
     authDomain: "products-assignment-1.firebaseapp.com",
@@ -59,7 +59,7 @@ export async function upload(file, currentUser, setIsLoading) {
     const snapshot = await uploadBytes(fileRef, file);
     const photoURL = await getDownloadURL(fileRef);
 
-    updateProfile(currentUser, {photoURL});
+    await updateProfile(currentUser, {photoURL});
 
     setIsLoading(false);
 

@@ -11,7 +11,6 @@ const Auth = (props) => {
     const emailInputRef = useRef();
     const passwordInputRef = useRef();
 
-
     const [isLogin, setIsLogin] = useState(true);
 
     const switchAuthModeHandler = () => {
@@ -50,7 +49,6 @@ const Auth = (props) => {
             }
         } catch (e) {
             alert(e.message)
-            // console.log(e);
         }
     }
 

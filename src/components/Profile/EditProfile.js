@@ -17,12 +17,16 @@ const EditProfile = (props) => {
     }
 
     const uploadImageHandler = async () => {
-        try {
-            const photoURL = await upload(photo, currentUser, setIsLoading)
-            authCtx.updatePhoto(photoURL);
-            setPhoto(null);
-        } catch (e) {
-            alert(e.message)
+        if (photo !== null) {
+            try {
+                const photoURL = await upload(photo, currentUser, setIsLoading)
+                authCtx.updatePhoto(photoURL);
+                setPhoto(null);
+            } catch (e) {
+                alert(e.message)
+            }
+        } else {
+            alert("Select an image")
         }
     }
 

@@ -38,7 +38,6 @@ const MainNavigation = () => {
         }
 
         const changeVisibility = () => {
-            console.log(open);
             setOpen((prevState => !prevState));
         }
 
