@@ -1,6 +1,7 @@
 import React from 'react';
 import {Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Typography} from "@mui/material";
 import {useNavigate} from 'react-router-dom'
+import styles from './ProductItem.module.css'
 
 const ProductItem = (props) => {
 
@@ -21,10 +22,10 @@ const ProductItem = (props) => {
                     style={{objectFit: 'contain'}}
                 />
                 <CardContent>
-                    <Typography gutterBottom variant={"subtitle2"} component="div">
+                    <Typography className={styles.text} gutterBottom variant={"subtitle2"} component="div">
                         {props.product.title}
                     </Typography>
-                    <Typography variant={"inherit"} color="text.secondary">
+                    <Typography className={styles.text} variant={"inherit"} color="text.secondary">
                         {props.product.description}
                     </Typography>
                     <Typography variant={"subtitle2"}>

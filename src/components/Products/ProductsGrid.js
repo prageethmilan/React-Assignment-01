@@ -38,6 +38,7 @@ const ProductsGrid = (props) => {
                     responsive={responsive}
                     showDots={true}
                     containerClass={"carousel-container"}
+                    className={styles.carousel}
                 >
                     {props.products.map((product) => {
                         return <ProductItem key={product.id} product={product}/>
