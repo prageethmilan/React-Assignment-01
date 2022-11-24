@@ -11,7 +11,8 @@ const ProductDetail = (props) => {
 
     useEffect(() => {
         loadProductDetailsHandler(productId);
-    }, [productId])
+        console.log('loading')
+    }, [])
 
     const loadProductDetailsHandler = (productId) => {
         fetch(`https://dummyjson.com/products/${productId}`)
