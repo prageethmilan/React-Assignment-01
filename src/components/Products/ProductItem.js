@@ -12,8 +12,8 @@ const ProductItem = (props) => {
     }
 
     return (
-        <Card sx={{maxWidth: 345}} style={{marginLeft: '10px', marginRight: '10px'}}>
-            <CardActionArea>
+        <Card sx={{maxWidth: 345}} className={styles.card}>
+            <CardActionArea className={styles.cardActionsArea}>
                 <CardMedia
                     component="img"
                     height="140"
@@ -33,7 +33,7 @@ const ProductItem = (props) => {
                     </Typography>
                 </CardContent>
             </CardActionArea>
-            <CardActions>
+            <CardActions className={styles.cardActions}>
                 <Button size={"small"} color={"primary"} onClick={() => showProductDetails(props.product.id)}>
                     View
                 </Button>

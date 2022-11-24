@@ -25,26 +25,32 @@ const Auth = (props) => {
     const submitFormHandler = (event) => {
         event.preventDefault();
 
-        if (regEmail.test(emailInputRef.current.value)) {
-            if (regPassword.test(passwordInputRef.current.value)) {
-                if (isLogin) {
-                    signInUserHandler()
-                } else {
-                    signupUserHandler();
-                }
-            } else {
-                alert('Please enter at least 8 character password including uppercase,lowercase letters,numbers and special characters.');
-            }
-        } else {
-            alert('Please enter correct email address.')
-        }
+        (regEmail.test(emailInputRef.current.value) ?
+                (regPassword.test(passwordInputRef.current.value) ?
+                        (isLogin ? signInUserHandler() : signupUserHandler())
+                        : alert('Please enter at least 8 character password including uppercase,lowercase letters,numbers and special characters.')
+                ) : alert('Please enter correct email address.')
+        )
+
+        // if (regEmail.test(emailInputRef.current.value)) {
+        //     if (regPassword.test(passwordInputRef.current.value)) {
+        //         if (isLogin) {
+        //             signInUserHandler()
+        //         } else {
+        //             signupUserHandler();
+        //         }
+        //     } else {
+        //         alert('Please enter at least 8 character password including uppercase,lowercase letters,numbers and special characters.');
+        //     }
+        // } else {
+        //     alert('Please enter correct email address.')
+        // }
     }
 
     const signInUserHandler = async () => {
         try {
             const data = await login(emailInputRef.current.value, passwordInputRef.current.value);
             if (data) {
-                // authCtx.login(data.user.uid);
                 dispatch(authActions.login(data.user.uid));
                 navigate('/products');
             }

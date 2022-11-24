@@ -26,6 +26,8 @@ const responsive = {
 
 const ProductsGrid = (props) => {
 
+    const products = props.products.filter((product, index) => index < 10);
+
     return (
         <section className={styles.main}>
             {props.products.length === 0
@@ -40,7 +42,7 @@ const ProductsGrid = (props) => {
                     containerClass={"carousel-container"}
                     className={styles.carousel}
                 >
-                    {props.products.map((product) => {
+                    {products.map((product) => {
                         return <ProductItem key={product.id} product={product}/>
                     })}
                 </Carousel>}
