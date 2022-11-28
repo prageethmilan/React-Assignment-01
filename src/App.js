@@ -15,11 +15,16 @@ function App() {
     return (
         <Layout>
             <Routes>
-                {!isLoggedIn ? <Route path={'/'} element={<WelcomePage/>}/> : <Route path={'/'} element={<Navigate replace to={'/products'}/>}/> }
-                {!isLoggedIn ? <Route path={'/auth'} element={<AuthPage/>}/> : <Route path={'/auth'} element={<Navigate replace to={'/products'}/>}/> }
-                {!isLoggedIn ? <Route path={'/products'} element={<Navigate replace to={'/auth'}/>}/> : <Route path={'/products'} element={<HomePage/>}/> }
-                {!isLoggedIn ? <Route path={'/profile'} element={<Navigate replace to={'/auth'}/>}/> : <Route path={'/profile'} element={<EditProfile/>}/> }
-                {!isLoggedIn ? <Route path={'/products/:productId'} element={<Navigate replace to={'/auth'}/>}/> : <Route path={'/products/:productId'} element={<ProductDetail/>}/> }
+                {!isLoggedIn ? <Route path={'/'} element={<WelcomePage/>}/> :
+                    <Route path={'/'} element={<Navigate replace to={'/products'}/>}/>}
+                {!isLoggedIn ? <Route path={'/auth'} element={<AuthPage/>}/> :
+                    <Route path={'/auth'} element={<Navigate replace to={'/products'}/>}/>}
+                {!isLoggedIn ? <Route path={'/products'} element={<Navigate replace to={'/auth'}/>}/> :
+                    <Route path={'/products'} element={<HomePage/>}/>}
+                {!isLoggedIn ? <Route path={'/profile'} element={<Navigate replace to={'/auth'}/>}/> :
+                    <Route path={'/profile'} element={<EditProfile/>}/>}
+                {!isLoggedIn ? <Route path={'/products/:productId'} element={<Navigate replace to={'/auth'}/>}/> :
+                    <Route path={'/products/:productId'} element={<ProductDetail/>}/>}
                 <Route path={'*'} element={<NotFound/>}/>
             </Routes>
         </Layout>

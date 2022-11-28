@@ -12,7 +12,6 @@ const Auth = (props) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-
     const emailInputRef = useRef();
     const passwordInputRef = useRef();
 

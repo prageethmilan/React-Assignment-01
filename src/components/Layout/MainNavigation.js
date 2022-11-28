@@ -20,7 +20,6 @@ const MainNavigation = () => {
 
             dispatch(authActions.updatePhoto(''));
             if (currentUser?.photoURL) {
-
                 dispatch(authActions.updatePhoto(currentUser.photoURL));
             }
 
