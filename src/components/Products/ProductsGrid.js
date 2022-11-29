@@ -4,6 +4,8 @@ import Carousel from "react-multi-carousel";
 import ProductItem from "./ProductItem";
 import styles from './ProductsGrid.module.css'
 import LoadingSpinner from "../UI/LoadingSpinner";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {Button} from "react-bootstrap";
 
 const responsive = {
     superLargeDesktop: {
@@ -30,6 +32,8 @@ const ProductsGrid = (props) => {
 
     return (
         <section className={styles.main}>
+            <Button variant={'primary'} className={'me-3'}>Add Item</Button>
+            <Button variant={'success'} >Update Item</Button>
             {props.products.length === 0
                 ?
                 <div className={styles.loaderDiv}>

@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Avatar} from "@mui/material";
+import NavDropdown from 'react-bootstrap/NavDropdown';
 import styles from './MainNavigation.module.css'
 import {NavLink, useNavigate} from "react-router-dom";
 import {logout, useAuth} from "../../store/firebase";
@@ -65,9 +66,29 @@ const MainNavigation = () => {
                                     className={(navData) => (navData.isActive ? styles.active : '')}
                                     to={'/products'}
                                 >
-                                    Home
+                                    Products
                                 </NavLink>
                             </li>}
+
+                            {isLoggedIn &&
+                            <li>
+                                <NavLink
+                                    className={(navData) => (navData.isActive ? styles.active : '')}
+                                    to={'/customers'}
+                                >
+                                    Customers
+                                </NavLink>
+                            </li>}
+                            {isLoggedIn &&
+                            <li>
+                                <NavLink
+                                    className={(navData) => (navData.isActive ? styles.active : '')}
+                                    to={'/orders'}
+                                >
+                                    Orders
+                                </NavLink>
+                            </li>}
+
                             {isLoggedIn && <li>
                                 <Avatar style={{cursor: 'pointer'}} src={photoURL} onClick={changeVisibility}/>
                             </li>}
