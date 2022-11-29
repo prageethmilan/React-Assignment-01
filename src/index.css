@@ -26,7 +26,7 @@ code {
     width: 100%;
 }
 
-.dropdown-menu{
+.dropdownMenu{
     position: absolute;
     z-index: 9999;
     top: 10%;
@@ -37,7 +37,7 @@ code {
     width: 200px;
 }
 
-.dropdown-menu::before{
+.dropdownMenu::before{
     content: '';
     position: absolute;
     top: -5px;
@@ -48,14 +48,14 @@ code {
     transform: rotate(45deg);
 }
 
-.dropdown-menu.active{
+.dropdownMenu.active{
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
     transition: var(--speed) ease;
 }
 
-.dropdown-menu.inactive{
+.dropdownMenu.inactive{
     opacity: 0;
     visibility: hidden;
     transform: translateY(-20px);

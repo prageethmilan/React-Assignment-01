@@ -6,6 +6,7 @@ import styles from './ProductsGrid.module.css'
 import LoadingSpinner from "../UI/LoadingSpinner";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Button} from "react-bootstrap";
+import {useNavigate} from "react-router-dom";
 
 const responsive = {
     superLargeDesktop: {
@@ -27,13 +28,17 @@ const responsive = {
 };
 
 const ProductsGrid = (props) => {
-
+    const navigate = useNavigate();
     const products = props.products.filter((product, index) => index < 10);
+
+    const showItemForm = (status) => {
+        navigate('/items/' + status);
+    }
 
     return (
         <section className={styles.main}>
-            <Button variant={'primary'} className={'me-3'}>Add Item</Button>
-            <Button variant={'success'} >Update Item</Button>
+            <Button variant={'primary'} className={'me-3'} onClick={() => showItemForm('add')}>Add Item</Button>
+            <Button variant={'success'} onClick={() => showItemForm('update')}>Update Item</Button>
             {props.products.length === 0
                 ?
                 <div className={styles.loaderDiv}>

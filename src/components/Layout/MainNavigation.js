@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import {Avatar} from "@mui/material";
-import NavDropdown from 'react-bootstrap/NavDropdown';
 import styles from './MainNavigation.module.css'
 import {NavLink, useNavigate} from "react-router-dom";
 import {logout, useAuth} from "../../store/firebase";
@@ -95,8 +94,7 @@ const MainNavigation = () => {
                         </ul>
                     </nav>
                 </header>
-                {isLoggedIn &&
-                <div className={`dropdown-menu ${open ? 'active' : 'inactive'}`}>
+                <div className={`dropdownMenu ${open ? 'active' : 'inactive'}`}>
                     <small>Logged in as :- </small>
                     <small><b>{currentUser?.email}</b></small>
                     <ul>
@@ -107,7 +105,7 @@ const MainNavigation = () => {
                         />
                         <DropdownItem action={logoutHandler} img={Imglogout} text={"Logout"}/>
                     </ul>
-                </div>}
+                </div>
             </div>
         );
     }

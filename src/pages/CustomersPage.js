@@ -1,7 +1,6 @@
 import React from 'react';
 import AddCustomerForm from "../components/Customers/AddCustomerForm";
 import SearchCustomer from "../components/Customers/SearchCustomer";
-import 'bootstrap/dist/css/bootstrap.min.css';
 import CustomerTable from "../components/Customers/CustomerTable";
 
 const CustomersPage = () => {
