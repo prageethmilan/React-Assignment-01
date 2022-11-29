@@ -1,6 +1,8 @@
 import Layout from "./components/Layout/Layout";
 import {useSelector} from "react-redux";
 import AddItemForm from "./components/Items/AddItemForm";
+import AddCustomerForm from "./components/Customers/AddCustomerForm";
+import CustomersPage from "./pages/CustomersPage";
 
 function App() {
 
@@ -21,7 +23,7 @@ function App() {
             {/*        <Route path={'/products/:productId'} element={<ProductDetail/>}/>}*/}
             {/*    <Route path={'*'} element={<NotFound/>}/>*/}
             {/*</Routes>*/}
-            <AddItemForm/>
+            <CustomersPage/>
         </Layout>
     );
 }
