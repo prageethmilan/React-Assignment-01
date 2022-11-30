@@ -5,7 +5,7 @@ const SearchCustomer = () => {
     return (
         <div className={'col-12 col-md-5'}>
             <div className="shadow-sm pt-3 pb-5 px-3 py-3 mt-2">
-                <h1 className="h1 mb-3">Search Customer</h1>
+
                 <div className="mb-3">
                     <label className="form-label" htmlFor="txtSearchCusID">Search Customer</label>
                     <input className="form-control" id="txtSearchCusID" placeholder="Customer ID, NIC, Name"
